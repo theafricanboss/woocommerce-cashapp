@@ -17,6 +17,8 @@ The #1 finance app in the App Store now available on WordPress. Receive Cash App
 
 Cash App - Mobile Money Payments Woocommerce Extension
 
+With over 854 wordpress downloads and over 200 active installations as of Nov 25, 2020, this remains the only and largest downloaded WordPress extension to-date.
+
 For more details about this woocommerce extension, **please visit [The African Boss](https://theafricanboss.com/cashapp)**
 
 See available screenshots or the store example of [Gura Stores](https://gurastores.com/) for visual details.
