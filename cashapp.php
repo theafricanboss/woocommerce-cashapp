@@ -3,10 +3,12 @@
  * Plugin Name: MOMO Cashapp
  * Plugin URI: https://theafricanboss.com/cashapp
  * Description: The #1 finance app in the App Store now on WordPress. Receive Cash App payments on your website with WooCommerce + Cash App
- * Author: The African Boss (theafricanboss@gmail.com)
+ * Author: The African Boss
  * Author URI: https://theafricanboss.com
- * Version: 2.0
- * Version Date: Oct 16, 2020
+ * Version: 2.2
+ * WC requires at least: 3.0.0
+ * WC tested up to: 4.9.1
+ * Version Date: Jan 14, 2020
  * Created: 2020
  * Copyright 2020 theafricanboss.com All rights reserved
  */
@@ -42,9 +44,10 @@ function cashapp_add_gateway_class( $gateways ) {
  * Dashboard Menu Button
  */
 function cashapp_admin_menu(){
-	add_menu_page( null, '<span style="color:#99FFAA">CASHAPP</span>', 'manage_options', 'wc-settings&tab=checkout&section=cashapp', 'cashapp_admin_menu', 'dashicons-money-alt' );
-	add_submenu_page( 'wc-settings&tab=checkout&section=cashapp' , 'Upgrade CASHAPP' , '<span style="color:#99FFAA">Upgrade >> </span>' , 'manage_options' , 'https://theafricanboss.com/cashapp' , null, null );
-	add_submenu_page( 'wc-settings&tab=checkout&section=cashapp' , 'Review CASHAPP' , '<span style="color:#99FFAA">Review >> </span>' , 'manage_options' , 'https://wordpress.org/support/plugin/wc-cashapp/reviews/?filter=5' , null, null );
+	add_menu_page( null, 'CASHAPP', 'manage_options', 'wc-settings&tab=checkout&section=cashapp', 'cashapp_admin_menu', 'dashicons-money-alt' );
+	add_submenu_page( 'wc-settings&tab=checkout&section=cashapp' , 'Upgrade CASHAPP' , '<span style="color:#99FFAA">Go Pro >> </span>' , 'manage_options' , 'https://theafricanboss.com/cashapp' , null, null );
+	add_submenu_page( 'wc-settings&tab=checkout&section=cashapp' , 'Feature my store' , 'Get Featured' , 'manage_options' , 'https://theafricanboss.com/cashapp#feature' , null, null );
+	add_submenu_page( 'wc-settings&tab=checkout&section=cashapp' , 'Review CASHAPP' , 'Review' , 'manage_options' , 'https://wordpress.org/support/plugin/wc-cashapp/reviews/?filter=5' , null, null );
 }
 add_action('admin_menu','cashapp_admin_menu');
 
@@ -52,11 +55,17 @@ add_action('admin_menu','cashapp_admin_menu');
  * Settings Button
  */
 function cashapp_settings_link( $links_array ){
-	array_unshift( $links_array, '<a href="/wp-admin/admin.php?page=wc-settings&tab=checkout&section=cashapp">Settings</a>' );
+	array_unshift( $links_array, '<a href="' .  esc_url( admin_url( 'admin.php?page=wc-settings&tab=checkout&section=cashapp', __FILE__ ) ) . '">Settings</a>' );
+
+	if( !is_plugin_active( esc_url( plugins_url( 'wc-cashapp-pro/cashapp.php', dirname(__FILE__) ) ) ) ){
+		$links_array['wc_cashapp_pro'] = sprintf('<a href="https://theafricanboss.com/cashapp/" target="_blank" style="color: #39b54a; font-weight: bold;">' . esc_html__('Go Pro for $29','wc-cashapp') . '</a>');
+	}
+	
 	return $links_array;
 }
 $plugin = plugin_basename(__FILE__); 
 add_filter( "plugin_action_links_$plugin", 'cashapp_settings_link' );
+
 
 /*
  * The class itself, please note that it is inside plugins_loaded action hook
@@ -94,17 +103,16 @@ function cashapp_init_gateway_class() {
 	$this->init_settings();
 	$this->enabled = $this->get_option( 'enabled' );
 	$this->title = $this->get_option( 'checkout_title' );
-	$this->description = $this->get_option( 'description' );
 	$this->ReceiverCASHAPPNo = $this->get_option( 'ReceiverCASHAPPNo' );
 	$this->ReceiverCASHAPPNoOwner = $this->get_option( 'ReceiverCASHAPPNoOwner' );
 	$this->ReceiverCashApp = $this->get_option( 'ReceiverCashApp' );
 	$this->ReceiverCashAppOwner = $this->get_option( 'ReceiverCashAppOwner' );
 	$this->ReceiverCASHAPPEmail = $this->get_option( 'ReceiverCASHAPPEmail' );
-		$this->checkout_description = $this->get_option( 'checkout_description' );
+	$this->checkout_description = $this->get_option( 'checkout_description' );
 	$this->store_instructions = $this->get_option( 'store_instructions' );
-		$this->cashapp_notice = $this->get_option( 'cashapp_notice' );
-		$this->toggleTutorial = $this->get_option( 'toggleTutorial' );
-		$this->toggleCredits = $this->get_option( 'toggleCredits' );
+	$this->cashapp_notice = $this->get_option( 'cashapp_notice' );
+	$this->toggleTutorial = $this->get_option( 'toggleTutorial' );
+	$this->toggleCredits = $this->get_option( 'toggleCredits' );
 
 	// This action hook saves the settings
 	add_action( 'woocommerce_update_options_payment_gateways_' . $this->id, array( $this, 'process_admin_options' ) );
@@ -139,11 +147,13 @@ function cashapp_init_gateway_class() {
 			'default'     => 'CashApp',
 			'placeholder' => 'CashApp',
 		),
-		'description' => array(
-			'title'       => 'Description',
+		'checkout_description' => array(
+			'title'       => 'Checkout Page Notice <a style="text-decoration:none" href="https://theafricanboss.com/cashapp/" target="_blank"><sup style="color:red">PRO</sup></a>',
 			'type'        => 'textarea',
-			'description' => 'This is the text which the user sees on the checkout page.',
-			'default'     => 'Pay with Cash App using this user-friendly payment gateway',
+			'description' => 'This is the description which the user sees during checkout. <a style="text-decoration:none" href="https://theafricanboss.com/cashapp/" target="_blank">EDIT WITH PRO</a>',
+			'default'     => 'Send money to $cashtag or click the Cash App button below',
+			'css'     => 'width:80%; pointer-events: none;',
+			'class'     => 'disabled',
 		),
 		'ReceiverCASHAPPNo' => array(
 			'title'       => 'Receiver Cash App No',
@@ -164,26 +174,12 @@ function cashapp_init_gateway_class() {
 			'description' => 'This is the name associated with your store Cash App account. Customers will send money to this Cash App account name',
 			'placeholder' => 'Jane D',
 		),
-		'instructions'    => array(
-			'title'       => 'Instructions',
-			'type'        => 'textarea',
-			'description' => 'Instructions that will be added to the thank you page and emails.',
-			'default'     => 'Send money to my Cash App',
-		),
 		'ReceiverCASHAPPEmail' => array(
 			'title'       => "Receiver Cash App Owner's Email",
 			'type'        => 'text',
 			'description' => 'This is the email associated with your store Cash App account or your receiving Cash App account. Customers will send money to this email',
 			'default'     => "@gmail.com",
 			'placeholder' => "email@website.com",
-		),
-		'checkout_description' => array(
-			'title'       => 'Checkout Page Notice <a style="text-decoration:none" href="https://theafricanboss.com/cashapp/" target="_blank"><sup style="color:red">PRO</sup></a>',
-			'type'        => 'textarea',
-			'description' => 'This is the description which the user sees during checkout. <a style="text-decoration:none" href="https://theafricanboss.com/cashapp/" target="_blank">EDIT WITH PRO</a>',
-			'default'     => 'Send money to $cashtag or click the Cash App button below',
-			'css'     => 'width:80%; pointer-events: none;',
-			'class'     => 'disabled',
 		),
 		'store_instructions'    => array(
 			'title'       => 'Store Instructions <a style="text-decoration:none" href="https://theafricanboss.com/cashapp/" target="_blank"><sup style="color:red">PRO</sup></a>',
@@ -226,11 +222,8 @@ function cashapp_init_gateway_class() {
 	 * Custom form 
 	 */
 	public function payment_fields () {
-		global $woocommerce, $total;
+		global $woocommerce, $total, $amount;
 		
-		// we need it to get any order details
-		$order = wc_get_order( $order_id );
-
 		$woocommerce->cart->get_cart();
 		$total = $woocommerce->cart->get_total();
 		$amount = $woocommerce->cart->total;
@@ -240,29 +233,43 @@ function cashapp_init_gateway_class() {
 		// Add this action hook if you want your custom payment gateway to support it
 		do_action( 'woocommerce_form_start', $this->id );
 			
-		echo '<p>Send ' , $total , ' to <a style="color:green" href="https://cash.app/', esc_attr( wp_kses_post( $this->ReceiverCashApp ) ), '" target="_blank">', esc_attr( wp_kses_post( $this->ReceiverCashApp ) ), '</a> or click the Cash App button below</p>';
+		echo '<p>Send ' , $total , ' to <a style="color:green" href="https://cash.app/', esc_attr( wp_kses_post( $this->ReceiverCashApp ) ), '/' , esc_attr( wp_kses_post( $amount  ) ), '" target="_blank">', esc_attr( wp_kses_post( $this->ReceiverCashApp ) ), '</a> or click the Cash App button below</p><br>';
 			
-		echo '<p><a href="https://cash.app/', esc_attr( wp_kses_post( $this->ReceiverCashApp ) ), '/' , $amount , '" target="_blank"><img width="150" height="150" alt="Square Cash app link" src="/wp-content/plugins/wc-cashapp/cashapp.png"></a></p>';
+		echo '<p>Click > <a href="https://cash.app/', esc_attr( wp_kses_post( $this->ReceiverCashApp ) ), '/' , esc_attr( wp_kses_post( $amount  ) ), '" target="_blank"><img style="float: none!important; max-height:150px!important"  width="150" height="150" alt="Square Cash app link" src="' ,  esc_url( plugins_url( 'cashapp.png', __FILE__ ) ), '"></a> or Scan > <a href="https://cash.app/', esc_attr( wp_kses_post( $this->ReceiverCashApp ) ), '/' , esc_attr( wp_kses_post( $amount  ) ), '" target="_blank"><img style="float: none!important; max-height:150px!important"  width="150" height="150" alt="Square Cash app link" src="https://chart.googleapis.com/chart?cht=qr&chld=L|0&chs=150x150&chl=https://cash.app/', esc_attr( wp_kses_post( $this->ReceiverCashApp ) ), '/' , esc_attr( wp_kses_post( $amount  ) ), '"></a></p><br>';
 			
-		echo '<p>Once done, <strong>come back to this page</strong>, and place the order below so we can receive shipping and delivery options.</p>';
+		echo '<p>Once done, <strong>come back to this page</strong>, and place the order below so we can receive shipping and delivery options.</p><br>';
 
-		echo 'If you are having an issue, please call <a href="tel:', esc_html( wp_kses_post($this->ReceiverCASHAPPNo)) ,'" target="_blank">', esc_html( wp_kses_post($this->ReceiverCASHAPPNo)) ,'</a> or email <a href="mailto:', esc_html( wp_kses_post($this->ReceiverCASHAPPEmail)) ,'" target="_blank">', esc_html( wp_kses_post($this->ReceiverCASHAPPEmail)) ,'</a>';
+		// if cashapp number is provided, we show it
+		if ( '' === $this->ReceiverCASHAPPNo ) {
+			$call = '';
+		} else {
+			$call = 'call <a href="tel:' . esc_html( wp_kses_post($this->ReceiverCASHAPPNo)) . '" target="_blank">' . esc_html( wp_kses_post($this->ReceiverCASHAPPNo)) . '</a>.';
+		}
+		
+		// if email address is provided, we show it
+		if ( '' === $this->ReceiverCASHAPPEmail ) {
+			$email = '';
+		} else {
+			$email = ' You can also email <a href="mailto:' . esc_html( wp_kses_post($this->ReceiverCASHAPPEmail)) . '" target="_blank">' . esc_html( wp_kses_post($this->ReceiverCASHAPPEmail)) . '</a>';
+		}
+		
+		echo 'If you are having an issue, please ' , $call , $email ;
 		
 		echo '<div class="clear"></div>';
 			
-			// if toggle Tutorial is disabled, we do not show credits
-			if ( 'no' === $this->toggleTutorial ) {
-				echo '<br>';
-			} else {
-				echo '<br>See this <a href=' . esc_url("https://theafricanboss.com/cashappdemo") . ' style="text-decoration: underline" target="_blank">1min video demo</a> explaining how this works. <br>';
-			}
-			
-			// if toggle Credits is disabled, we do not show credits
-			if ( 'no' === $this->toggleCredits ) {
-				echo '<br>';
-			} else {
-				echo '<br><br> <a href=' . esc_url("https://theafricanboss.com/cashapp") . ' style="text-decoration: underline;" target="_blank">Powered by The African Boss</a><br>';
-			}
+		// if toggle Tutorial is disabled, we do not show credits
+		if ( 'no' === $this->toggleTutorial ) {
+			echo '<br>';
+		} else {
+			echo '<br>See this <a href=' . esc_url("https://theafricanboss.com/cashappdemo") . ' style="text-decoration: underline" target="_blank">1min video demo</a> explaining how this works. <br>';
+		}
+		
+		// if toggle Credits is disabled, we do not show credits
+		if ( 'no' === $this->toggleCredits ) {
+			echo '<br>';
+		} else {
+			echo '<br><br> <a href=' . esc_url("https://theafricanboss.com/cashapp") . ' style="text-decoration: underline;" target="_blank">Powered by The African Boss</a><br>';
+		}
 
 		do_action( 'woocommerce_form_end', $this->id );
 
@@ -290,19 +297,21 @@ function cashapp_init_gateway_class() {
 
 
 	public function thankyou_page( $order_id ) {
-		    
-			// we need it to get any order details
+		
 			$order = wc_get_order( $order_id );
+		
+			$total = $order->get_total();
 			
     		if ( 'cashapp' === $order->get_payment_method() ) {
 		    
-    		echo '<h2>Cash App Notice</h2><p>Send the requested total to <a style="color:green" href="https://cash.app/', esc_attr( wp_kses_post( $this->ReceiverCashApp ) ), '" target="_blank">', esc_attr( wp_kses_post( $this->ReceiverCashApp ) ), '</a> or click the Cash App button below</p>';
+    		echo '<h2>Cash App Notice</h2><p>Send the requested total to <a style="color:green" href="https://cash.app/', esc_attr( wp_kses_post( $this->ReceiverCashApp ) ), '/' , esc_attr( wp_kses_post( $total  ) ), '" target="_blank">', esc_attr( wp_kses_post( $this->ReceiverCashApp ) ), '</a> or click the Cash App button below</p>';
     
-    		echo '<p><a href="https://cash.app/', esc_attr( wp_kses_post( $this->ReceiverCashApp ) ), '" target="_blank"><img width="150" height="150" alt="Square Cash app link" src="/wp-content/plugins/wc-cashapp/cashapp.png"></a></p>' , '<br><hr><br>';
+			echo '<p>Click > <a href="https://cash.app/', esc_attr( wp_kses_post( $this->ReceiverCashApp ) ), '/' , esc_attr( wp_kses_post( $total  ) ), '" target="_blank"><img style="float: none!important; max-height:150px!important"  width="150" height="150" alt="Square Cash app link" src="' ,  esc_url( plugins_url( 'cashapp.png', __FILE__ ) ), '"></a> or Scan > <a href="https://cash.app/', esc_attr( wp_kses_post( $this->ReceiverCashApp ) ), '/' , esc_attr( wp_kses_post( $total  ) ), '" target="_blank"><img style="float: none!important; max-height:150px!important"  width="150" height="150" alt="Square Cash app link" src="https://chart.googleapis.com/chart?cht=qr&chld=L|0&chs=150x150&chl=https://cash.app/', esc_attr( wp_kses_post( $this->ReceiverCashApp ) ), '/' , esc_attr( wp_kses_post( $total  ) ), '"></a></p><br>';
+
     
     		if ( $this->store_instructions ) {
     			echo '<h2>Store Instructions</h2>';
-    			echo 'Here are some additional store instructions: <br>' , wp_kses_post( wpautop( wptexturize( $this->store_instructions ) ) ) , '<br><hr><br>';
+    			echo 'Here are some additional store instructions: <br>' , "Please send the total amount requested to our store if you haven't yet" , '<br><hr><br>';
     		}
 		
 		}
@@ -324,7 +333,7 @@ function cashapp_init_gateway_class() {
 			echo '<p><a href="https://cash.app/', esc_attr( wp_kses_post( $this->ReceiverCashApp ) ), '" target="_blank"><img width="150" height="150" alt="Square Cash app link" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Square_Cash_app_logo.svg/512px-Square_Cash_app_logo.svg.png"></a></p>';
 
 			if ( $this->store_instructions ) {
-				echo 'Here are some additional store instructions: <br>' , wp_kses_post( wpautop( wptexturize( $this->store_instructions ) ) . PHP_EOL );
+				echo 'Here are some additional store instructions: <br>' , "Please send the total amount requested to our store if you haven't yet";
 			}
 			
 		}
