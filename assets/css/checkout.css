@@ -1,0 +1,6 @@
+.woocommerce-checkout-payment .payment_method_cashapp img {
+    height: auto;
+    max-width: 35px!important;
+    display: flex!important;
+    justify-content: flex-end!important;
+}
