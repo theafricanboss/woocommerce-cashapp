@@ -1,9 +1,6 @@
 svn-local/
 readme.txt
 *.zip
-*.php
-*.jpg
-*.png
 .DS_Store
 !assets/*
 !includes/*
