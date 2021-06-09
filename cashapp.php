@@ -1,6 +1,6 @@
 <?php
 /*
- * Plugin Name: Checkout with Cashapp WC
+ * Plugin Name: Checkout with Cashapp on WooCommerce
  * Plugin URI: https://theafricanboss.com/cashapp
  * Description: The #1 finance app in the App Store now on WordPress. Receive Cash App payments on your website with WooCommerce + Cash App
  * Author: The African Boss
