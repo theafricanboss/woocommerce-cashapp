@@ -1,5 +1,4 @@
 svn-local/
-readme.txt
 *.zip
 .DS_Store
 !assets/*
