@@ -167,13 +167,15 @@ if ( class_exists ( 'WC_Payment_Gateway' ) ) {
 		}
 		
 		//Thank you page
-		public function thankyou_page( $order_id ) {
-			require_once MOMOCASHAPP_PLUGIN_DIR . 'includes/pages/thankyou.php';
+		public function thankyou_page( $order ) {
+			if ( 'on-hold' === $order->get_status() && 'cashapp' === $order->get_payment_method() ) {
+				require_once MOMOCASHAPP_PLUGIN_DIR . 'includes/pages/thankyou.php';
+			}
 		}
 
 		//Add content to the WC emails
 		public function email_instructions( $order, $sent_to_admin, $plain_text = false ) {
-			if ($order->get_status() == 'on-hold') {
+			if ( 'on-hold' === $order->get_status() && 'cashapp' === $order->get_payment_method() ) {
 				require_once MOMOCASHAPP_PLUGIN_DIR . 'includes/notifications/email.php';
 			}
 		}
@@ -182,11 +184,13 @@ if ( class_exists ( 'WC_Payment_Gateway' ) ) {
 		public function process_payment( $order_id ) {
 
 			if( ! is_wp_error($order) ) {
-			
-				require_once MOMOCASHAPP_PLUGIN_DIR . 'includes/notifications/note.php';
 				
 				// Mark as on-hold (we're awaiting the payment).
 				$order->update_status( apply_filters( 'woocommerce_cashapp_process_payment_order_status', 'on-hold', $order ), __( 'Checking for payment', 'woocommerce' ) );
+			
+				if ( 'cashapp' === $order->get_payment_method() ) {
+					require_once MOMOCASHAPP_PLUGIN_DIR . 'includes/notifications/note.php';
+				}
 				
 				// reduce inventory
 				$order->reduce_order_stock();

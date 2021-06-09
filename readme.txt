@@ -84,7 +84,8 @@ Please check screenshots for more details on what is reported.
 - Only send email with cashapp link when order is on hold
 - Cashapp checkout icon resized
 - Plugin name changed from MOMO Cashapp to 'Checkout with Cashapp on WooCommerce'
-- WP and WC compatibility updated
+- Send specific notices while awaiting payment with $order->get_status() &&  $order->get_payment_method()
+- Updated WP and WC compatibility
 
 = 3.0 Mar 1, 2021 =
 
