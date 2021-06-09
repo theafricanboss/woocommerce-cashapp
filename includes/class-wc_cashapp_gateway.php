@@ -11,7 +11,7 @@ if ( class_exists ( 'WC_Payment_Gateway' ) ) {
 		public function __construct() {
 
 			$this->id = 'cashapp'; // payment gateway plugin ID
-			$this->icon = MOMOCASHAPP_PLUGIN_DIR_URL . 'assets/images/cashapp.png'; // URL of the icon that will be displayed on checkout page near your gateway name
+			$this->icon = MOMOCASHAPP_PLUGIN_DIR_URL . 'assets/images/cashapp_35.png'; // URL of the icon that will be displayed on checkout page near your gateway name
 			$this->has_fields = true; // in case you need a custom form
 			$this->method_title = 'Cash App';
 			$this->method_description = 'Easily receive Cash App payments'; // will be displayed on the options page		
@@ -173,7 +173,9 @@ if ( class_exists ( 'WC_Payment_Gateway' ) ) {
 
 		//Add content to the WC emails
 		public function email_instructions( $order, $sent_to_admin, $plain_text = false ) {
-			require_once MOMOCASHAPP_PLUGIN_DIR . 'includes/notifications/email.php';
+			if ($order->get_status() == 'on-hold') {
+				require_once MOMOCASHAPP_PLUGIN_DIR . 'includes/notifications/email.php';
+			}
 		}
 		
 		//Process Order
