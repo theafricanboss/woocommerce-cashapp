@@ -52,7 +52,6 @@ See the screenshots or the store example of [Gura Stores](https://gurastores.com
 
 <img src="assets/images/dashboard.jpg" alt="plugin settings" width="auto" height="550" height="auto"/>
 
-
 ## Installation
 
 ### From Dashboard ( WordPress admin )
