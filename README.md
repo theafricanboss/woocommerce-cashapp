@@ -6,7 +6,7 @@
     <img src="assets/images/cashapp.png" alt="MOMO Plugin logo" height="100" width="auto">
   </a>
 
-  <h3 align="center">MOMO Cash App - Checkout on Woocommerce with Cashapp</h3>
+  <h3 align="center">Checkout with Cashapp on WooCommerce</h3>
 
   <p align="center">
     The #1 finance app in the App Store now available on WordPress. Receive Cash App payments on your website with WooCommerce + Cash App
@@ -57,13 +57,13 @@ See the screenshots or the store example of [Gura Stores](https://gurastores.com
 ### From Dashboard ( WordPress admin )
 
 - Go to Plugins -> Add New
-- Search for ‘MOMO Cash App’
+- Search for ‘Checkout with Cashapp on WooCommerce’
 - Click on Install Now
 - Activate the plugin through the “Plugins” menu in WordPress.
 
 ### Using cPanel or FTP
 
-- Download ‘MOMO Cash App’ from [The African Boss](https://theafricanboss.com/cashapp)
+- Download ‘Checkout with Cashapp on WooCommerce’ from [The African Boss](https://theafricanboss.com/cashapp)
 - Unzip wc-cashapp.zip’ file and
 - Upload wc-cashapp folder to the “/wp-content/plugins/” directory.
 - Activate the plugin through the “Plugins” menu in WordPress.

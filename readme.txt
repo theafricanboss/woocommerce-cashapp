@@ -1,10 +1,10 @@
-=== MOMO Cashapp ===
+=== Checkout with Cashapp on WooCommerce ===
 Contributors: theafricanboss
 Donate Link: https://theafricanboss.com
 Tags: cashapp, cash app, finance, payments, money, transfer, receive, send, money transfer, usa, mobile money, cash, momo, woocommerce
 Requires at least: 4.0
-Tested up to: 5.7
-Stable tag: 3.0
+Tested up to: 5.7.2
+Stable tag: 3.1
 Requires PHP: 5.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -13,9 +13,9 @@ The #1 finance app in the App Store now available on WordPress. Receive Cash App
 
 == Description ==
 
-**MOMO Cash App - Mobile Money Payments WooCommerce Extension**
+**MOMO Cashapp is now Checkout with Cashapp on WooCommerce**
 
-Cash App - Mobile Money Payments Woocommerce Extension
+> If using the PRO version, deactivate this plugin first.
 
 For more details about this woocommerce extension, **please visit [The African Boss](https://theafricanboss.com/cashapp)**
 
@@ -42,13 +42,13 @@ See the screenshots or the store example of [Gura Stores](https://gurastores.com
 = From Dashboard ( WordPress admin ) =
 
 - Go to Plugins -> Add New
-- Search for ‘MOMO Cash App’
+- Search for ‘Checkout with Cashapp’
 - Click on Install Now
 - Activate the plugin through the “Plugins” menu in WordPress.
 
 = Using cPanel or FTP =
 
-- Download ‘MOMO Cash App’ from [The African Boss](https://theafricanboss.com/cashapp)
+- Download ‘Checkout with Cashapp’ from [The African Boss](https://theafricanboss.com/cashapp)
 - Unzip wc-cashapp.zip’ file and
 - Upload wc-cashapp folder to the “/wp-content/plugins/” directory.
 - Activate the plugin through the “Plugins” menu in WordPress.
@@ -78,6 +78,14 @@ Please check screenshots for more details on what is reported.
 3. This is what the customer visiting your website will see on the thank you page after placing the order
 
 == Changelog ==
+
+= 3.1 June 1, 2021 =
+
+- Only send email with cashapp link when order is on hold
+- Cashapp checkout icon resized
+- Plugin name changed from MOMO Cashapp to 'Checkout with Cashapp on WooCommerce'
+- Send specific notices while awaiting payment with $order->get_status() &&  $order->get_payment_method()
+- Updated WP and WC compatibility
 
 = 3.0 Mar 1, 2021 =
 
