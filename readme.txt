@@ -19,7 +19,7 @@ The #1 finance app in the App Store now available on WordPress. Receive Cash App
 
 For more details about this woocommerce extension, **please visit [The African Boss](https://theafricanboss.com/cashapp)**
 
-See available screenshots or the store example of [Gura Stores](https://gurastores.com/) for visual details.
+See available screenshots or the store example of [Gura Stores](https://gurastores.com/test/) for visual details.
 
 = PRO or customized version =
 
@@ -31,11 +31,11 @@ Visit [The African Boss](https://theafricanboss.com/cashapp) for more details
 
 An example of the plugin in use is the following store:
 
-[Gura Stores](https://gurastores.com/)
+[Gura Stores](https://gurastores.com/test/)
 
 This plugin displays a Cash App link
 
-See the screenshots or the store example of [Gura Stores](https://gurastores.com/) for visual details.
+See the screenshots or the store example of [Gura Stores](https://gurastores.com/test/) for visual details.
 
 == Installation ==
 
