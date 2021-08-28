@@ -7,14 +7,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( class_exists ( 'WC_Payment_Gateway' ) ) {
 
 	class wc_cashapp_gateway extends WC_Payment_Gateway {
-		
+
 		public function __construct() {
 
 			$this->id = 'cashapp'; // payment gateway plugin ID
 			$this->icon = MOMOCASHAPP_PLUGIN_DIR_URL . 'assets/images/cashapp_35.png'; // URL of the icon that will be displayed on checkout page near your gateway name
 			$this->has_fields = true; // in case you need a custom form
 			$this->method_title = 'Cash App';
-			$this->method_description = 'Easily receive Cash App payments'; // will be displayed on the options page		
+			$this->method_description = 'Easily receive Cash App payments'; // will be displayed on the options page
 
 			$this->init_settings();
 			$this->enabled = $this->get_option( 'enabled' );
@@ -33,9 +33,11 @@ if ( class_exists ( 'WC_Payment_Gateway' ) ) {
 			$this->toggleTutorial = $this->get_option( 'toggleTutorial' );
 			$this->toggleCredits = $this->get_option( 'toggleCredits' );
 
+			if ( isset( $this->ReceiverCashApp ) ) { $test = ' <a href="https://cash.app/'. esc_attr( wp_kses_post( $this->ReceiverCashApp ) ). '/1" target="_blank">Test</a>'; } else { $test = ''; }
+
 			$this->form_fields = array(
 				'enabled' => array(
-					'title'       => 'Enable CASHAPP',
+					'title'       => 'Enable CASHAPP' . $test,
 					'label'       => 'Check to Enable / Uncheck to Disable',
 					'type'        => 'checkbox',
 					'default'     => 'no'
@@ -54,7 +56,7 @@ if ( class_exists ( 'WC_Payment_Gateway' ) ) {
 					'placeholder' => "+1234567890",
 				),
 				'ReceiverCashApp' => array(
-					'title'       => 'Receiver Cash App account',
+					'title'       => 'Receiver Cash App account' . $test,
 					'type'        => 'text',
 					'description' => 'This is the Cash App account associated with your store Cash App account. Customers will send money to this Cash App account',
 					'default'     => '$',
@@ -85,8 +87,8 @@ if ( class_exists ( 'WC_Payment_Gateway' ) ) {
 					'title'       => 'Thank You Notice <a style="text-decoration:none" href="https://theafricanboss.com/cashapp/" target="_blank"><sup style="color:red">PRO</sup></a>',
 					'type'        => 'textarea',
 					'description' => 'Notice that will be added to the thank you page before store instructions if any. <a style="text-decoration:none" href="https://theafricanboss.com/cashapp/" target="_blank">APPLY CHANGES WITH PRO</a>',
-					'default'     => "<p>We are checking our systems to confirm that we received. If you haven't sent the money already, please make sure to do so now.</p>" . 
-					'<p>Once confirmed, we will proceed with the shipping and delivery options you chose.</p>' . 
+					'default'     => "<p>We are checking our systems to confirm that we received. If you haven't sent the money already, please make sure to do so now.</p>" .
+					'<p>Once confirmed, we will proceed with the shipping and delivery options you chose.</p>' .
 					'<p>Thank you for doing business with us! You will be updated regarding your order details soon.</p>',
 					'css'     => 'width:80%; pointer-events: none;',
 					'class'     => 'disabled',
@@ -138,10 +140,10 @@ if ( class_exists ( 'WC_Payment_Gateway' ) ) {
 					'default'     => 'no',
 				),
 			);
-			
+
 			// Gateways can support subscriptions, refunds, saved payment methods
 			$this->supports = array('products');
-			
+
 			// This action hook saves the settings
 			add_action( 'woocommerce_update_options_payment_gateways_' . $this->id, array( $this, 'process_admin_options' ) );
 
@@ -150,22 +152,22 @@ if ( class_exists ( 'WC_Payment_Gateway' ) ) {
 
 			// Thank you page
 			add_action( 'woocommerce_before_thankyou', array( $this, 'thankyou_page' ) );
-			
+
 			// Customer Emails
 			add_action( 'woocommerce_email_before_order_table', array( $this, 'email_instructions' ), 10, 3 );
-				
+
 		}
-		
+
 		//Checkout page
 		public function payment_fields () {
 			require_once MOMOCASHAPP_PLUGIN_DIR . 'includes/pages/checkout.php';
 		}
-		
+
 		//Payment Custom JS and CSS
 		public function payment_scripts() {
 			require_once MOMOCASHAPP_PLUGIN_DIR . 'includes/functions/payment_scripts.php';
 		}
-		
+
 		//Thank you page
 		public function thankyou_page( $order ) {
 			if ( 'on-hold' === $order->get_status() && 'cashapp' === $order->get_payment_method() ) {
@@ -179,25 +181,25 @@ if ( class_exists ( 'WC_Payment_Gateway' ) ) {
 				require_once MOMOCASHAPP_PLUGIN_DIR . 'includes/notifications/email.php';
 			}
 		}
-		
+
 		//Process Order
 		public function process_payment( $order_id ) {
 
 			if( ! is_wp_error($order) ) {
-				
+
 				// Mark as on-hold (we're awaiting the payment).
 				$order->update_status( apply_filters( 'woocommerce_cashapp_process_payment_order_status', 'on-hold', $order ), __( 'Checking for payment', 'woocommerce' ) );
-			
+
 				if ( 'cashapp' === $order->get_payment_method() ) {
 					require_once MOMOCASHAPP_PLUGIN_DIR . 'includes/notifications/note.php';
 				}
-				
+
 				// reduce inventory
 				$order->reduce_order_stock();
-				
+
 				// Empty cart
 				$woocommerce->cart->empty_cart();
-				
+
 				// Redirect to the thank you page
 				return array( 'result' => 'success', 'redirect' => $this->get_return_url( $order ) );
 
@@ -205,9 +207,9 @@ if ( class_exists ( 'WC_Payment_Gateway' ) ) {
 				wc_add_notice(  'Connection error.', 'error' );
 				return;
 			}
-			
+
 		}
-		
+
 		//Webhook
 		public function webhook() {
 			require_once MOMOCASHAPP_PLUGIN_DIR . 'includes/functions/webhook.php';

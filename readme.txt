@@ -3,7 +3,7 @@ Contributors: theafricanboss
 Donate Link: https://theafricanboss.com
 Tags: cashapp, cash app, finance, payments, money, transfer, receive, send, money transfer, usa, mobile money, cash, momo, woocommerce
 Requires at least: 4.0
-Tested up to: 5.7.2
+Tested up to: 5.8
 Stable tag: trunk
 Requires PHP: 5.0
 License: GPLv3
@@ -78,6 +78,11 @@ Please check screenshots for more details on what is reported.
 3. This is what the customer visiting your website will see on the thank you page after placing the order
 
 == Changelog ==
+
+= 3.2 August 27, 2021 =
+
+- Added test button to settings page to see what customers see when they click the button or run the QR code
+- Updated WP and WC compatibility
 
 = 3.1 June 1, 2021 =
 
