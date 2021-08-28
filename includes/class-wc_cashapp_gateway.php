@@ -170,7 +170,7 @@ if ( class_exists ( 'WC_Payment_Gateway' ) ) {
 
 		//Thank you page
 		public function thankyou_page( $order ) {
-			if ( 'on-hold' === $order->get_status() && 'cashapp' === $order->get_payment_method() ) {
+			if ( 'cashapp' === $order->get_payment_method() ) {
 				require_once MOMOCASHAPP_PLUGIN_DIR . 'includes/pages/thankyou.php';
 			}
 		}

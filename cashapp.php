@@ -37,6 +37,27 @@ if( ! is_plugin_active ( 'woocommerce/woocommerce.php' ) ){
 }
 
 if ( current_user_can( 'manage_options' ) ) {
+
+	add_action( 'admin_enqueue_scripts', function () {
+		$currentScreen = get_current_screen();
+		// var_dump($currentScreen);
+		if ($currentScreen->id == 'cashapp_page_momo_cashapp_recommended_menu_page' || $currentScreen->id == 'cashapp_page_momo_cashapp_tutorials_menu_page' ) {
+			wp_register_style( 'bootstrap', MOMOCASHAPP_PLUGIN_DIR_URL . 'assets/css/bootstrap.min.css');
+			wp_enqueue_style( 'bootstrap' );
+		} else {
+			return;
+		}
+	});
+
+
+	if ( is_plugin_active( 'wc-cashapp-pro/cashapp.php' ) ) {
+		deactivate_plugins( MOMOCASHAPP_PLUGIN_BASENAME );
+		activate_plugin( 'wc-cashapp-pro/cashapp.php');
+		wp_die( '<div><p>Checkout with Cashapp has been deactivated because the PRO version is activated.
+		<strong>Enjoy the upgrade</strong></p></div>
+		<div><a href="' .  esc_url( admin_url( 'admin.php?page=wc-settings&tab=checkout&section=cashapp', __FILE__ ) ) . '">Set up the plugin</a> | <a href="' . admin_url('plugins.php') . '">Return</a></div>' );
+	}
+
 	include_once MOMOCASHAPP_PLUGIN_DIR . 'pro/index.php';
 	require_once MOMOCASHAPP_PLUGIN_DIR . 'includes/admin/dashboard.php';
 }

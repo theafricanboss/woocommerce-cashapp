@@ -20,7 +20,7 @@ echo '<p>Send <a style="color:green" href="https://cash.app/', esc_attr( wp_kses
 echo '<p>Please <strong style="font-size:large;">use your Order Number (available once you place order)</strong> as the payment reference.</p>';
 // echo '<br>';
 
-echo '<p>Click > ';
+echo '<p class="momo-cashapp">Click > ';
 
 echo '<a href="https://cash.app/', esc_attr( wp_kses_post( $this->ReceiverCashApp ) ), '/' , esc_attr( wp_kses_post( $amount  ) ), '" target="_blank"><img style="float: none!important; max-height:100px!important; max-width:100px!important;" alt="Square Cash app link" src="' , esc_url( MOMOCASHAPP_PLUGIN_DIR_URL . 'assets/images/cashapp.png' ) , '"></a>';
 
@@ -29,7 +29,7 @@ echo ' or Scan > <a href="https://cash.app/', esc_attr( wp_kses_post( $this->Rec
 
 echo '<p><strong>After paying, please come back here and place the order</strong> below so we can receive shipping and delivery options.</p>';
 // echo '<br>';
-	
+
 // if cashapp number is provided, we show it
 if ( '' === $this->ReceiverCASHAPPNo ) {
 	$call = '';

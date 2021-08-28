@@ -1,7 +1,5 @@
 <?php if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-
 <div class="container">
 
     <h1>Recommended Plugins</h2>
@@ -44,7 +42,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Get Cash PRO | For donations, tips, funds from Cash App, Venmo, PayPal</h5>
                     <p class="card-text">This plugin adds QR codes anywhere to your site to accept donations, tips, funds, support, etc</p>
-                    <a href="https://theafricanboss.com/get-cash" class="btn btn-success" target="_blank">Buy for $9</a>
+                    <a href="https://theafricanboss.com/get-cash" class="btn btn-success" target="_blank">Buy for $19</a>
                 </div>
             </div>
         </div>

@@ -1,6 +1,13 @@
-.woocommerce-checkout-payment .payment_method_cashapp img {
-    height: auto;
-    max-width: 35px!important;
-    display: flex!important;
-    justify-content: flex-end!important;
+.momo-cashapp img {
+	width: 100px !important;
+	min-height: 100px !important;
+}
+
+.momo-cashapp a,
+a:before,
+a:after,
+a:hover,
+a:active {
+	content: none;
+	text-decoration: none;
 }

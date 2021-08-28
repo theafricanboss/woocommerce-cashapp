@@ -1,7 +1,5 @@
 <?php if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-
 <div class="container">
 
     <h1>Tutorials</h2>
@@ -10,7 +8,7 @@
 
     <div class="row">
         <div class="col-12 col-md-6">
-    
+
             <div class="card">
                 <iframe width="100%" height="215" src="https://www.youtube.com/embed/Deacc5qDJyk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 <div class="card-body">
@@ -22,7 +20,7 @@
 
         </div>
         <div class="col-12 col-md-6">
-    
+
             <div class="card">
                 <iframe width="100%" height="215" src="https://www.youtube.com/embed/3OKDLA_eTeE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 <div class="card-body">
@@ -31,7 +29,7 @@
                     <a href="https://youtu.be/3OKDLA_eTeE" class="btn btn-danger" target="_blank">Subscribe to our Youtube channel</a>
                 </div>
             </div>
-            
+
         </div>
     </div>
 
