@@ -4,7 +4,7 @@ Donate Link: https://theafricanboss.com
 Tags: cashapp, cash app, finance, payments, money, transfer, receive, send, money transfer, usa, mobile money, cash, momo, woocommerce
 Requires at least: 4.0
 Tested up to: 5.7.2
-Stable tag: 3.1
+Stable tag: trunk
 Requires PHP: 5.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
