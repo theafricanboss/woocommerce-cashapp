@@ -169,7 +169,9 @@ if ( class_exists ( 'WC_Payment_Gateway' ) ) {
 		}
 
 		//Thank you page
-		public function thankyou_page( $order ) {
+		public function thankyou_page( $order_id ) {
+			global $woocommerce, $order;
+			$order = wc_get_order( $order_id );
 			if ( 'cashapp' === $order->get_payment_method() ) {
 				require_once MOMOCASHAPP_PLUGIN_DIR . 'includes/pages/thankyou.php';
 			}
@@ -184,6 +186,8 @@ if ( class_exists ( 'WC_Payment_Gateway' ) ) {
 
 		//Process Order
 		public function process_payment( $order_id ) {
+			global $woocommerce, $order;
+			$order = wc_get_order( $order_id );
 
 			if( ! is_wp_error($order) ) {
 
