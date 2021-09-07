@@ -1,6 +1,12 @@
-.momo-cashapp img {
+.momo-img {
+	display: inline-block !important;
+	float: none !important;
+	height: 100px !important;
 	width: 100px !important;
+	max-height: 100px !important;
+	max-width: 100px !important;
 	min-height: 100px !important;
+	min-width: 100px !important;
 }
 
 .momo-cashapp a,

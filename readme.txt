@@ -79,7 +79,15 @@ Please check screenshots for more details on what is reported.
 
 == Changelog ==
 
-= 3.2 August 27, 2021 =
+= 3.3 September 7, 2021 =
+- Added .momo-img class that overwrites theme CSS for the button and QR code
+- Changed the wording and removed "shipping and delivery" to include digital woocommerce sellers
+- Removed version date
+
+= 3.2.1 August 30, 2021 =
+- Fixed order order_id occurences
+
+= 3.2 August 30, 2021 =
 
 - Added test button to settings page to see what customers see when they click the button or run the QR code
 - Sharing payment methods with free versions to keep data across

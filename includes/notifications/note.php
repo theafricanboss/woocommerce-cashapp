@@ -10,7 +10,7 @@ $woocommerce->cart->get_cart();
 $total = $woocommerce->cart->get_total();
 
 $note = 'Your order was received!'.'<br><br>'.
-	'We are checking our Cash App to confirm that we received the <strong style="text-transform:uppercase;">' . $total . '</strong> you sent so we can proceed with the shipping and delivery options you chose.'.'<br><br>'.
+	'We are checking our Cash App to confirm that we received the <strong style="text-transform:uppercase;">' . $total . '</strong> you sent so we can start processing your order.'.'<br><br>'.
 	'Thank you for doing business with us!<br> You will be updated regarding your order details soon<br>'.
 	'Kindest Regards,<br>'.
 	'Store Assistant';
