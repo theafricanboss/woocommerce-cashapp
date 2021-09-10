@@ -5,7 +5,7 @@
  * Description: The #1 finance app in the App Store now on WordPress. Receive Cash App payments on your website with WooCommerce + Cash App
  * Author: The African Boss
  * Author URI: https://theafricanboss.com
- * Version: 3.3
+ * Version: 3.3.1
  * WC requires at least: 3.0.0
  * WC tested up to: 5.6.0
  * Version Date: Aug 30, 2021
