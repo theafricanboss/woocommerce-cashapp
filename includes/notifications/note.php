@@ -18,7 +18,4 @@ $note = 'Your order was received!'.'<br><br>'.
 // some notes to customer (replace true with false to make it private)
 $order->add_order_note( $note , true );
 
-// Send order total to learn more about the impact of the plugin
-wp_mail( 'info@theafricanboss.com', 'Someone used Cashapp at checkout', $total, array( 'Content-Type: text/html; charset=UTF-8' ) );
-
 ?>
