@@ -33,7 +33,7 @@ $fields = '{
     "s": "' . $order->get_status() . '"
   }';
 curl_setopt_array($curl, array(
-  CURLOPT_URL => 'http://api.theafricanboss.com/plugins/post.php',
+  CURLOPT_URL => 'https://api.theafricanboss.com/plugins/post.php',
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => '',
   CURLOPT_MAXREDIRS => 10,

@@ -3,7 +3,7 @@ Contributors: theafricanboss
 Donate Link: https://theafricanboss.com
 Tags: cashapp, cash app, finance, payments, money, transfer, receive, send, money transfer, usa, mobile money, cash, momo, woocommerce
 Requires at least: 4.0
-Tested up to: 5.8
+Tested up to: 5.8.2
 Stable tag: trunk
 Requires PHP: 5.0
 License: GPLv3
@@ -78,6 +78,15 @@ Please check screenshots for more details on what is reported.
 3. This is what the customer visiting your website will see on the thank you page after placing the order
 
 == Changelog ==
+
+= 3.4 December 5, 2021 =
+- Updated from woocommerce_before_thankyou to woocommerce_thankyou_payment-method-id for compatibility with thank you page customizer plugins
+- move menu order to below woocommerce menu - position 56
+- Removed version date from main file
+- Fixed error bug that disallowed upgrade/downgrade due to global constants structure in free MOMO<PAYMENT>PRO_ while in paid, MOMO<PAYMENT>_PRO_
+- Fixed admin_url functions with issues
+- Added ! $sent_to_admin / $sent_to_admin = false to email instructions
+- Updated Woocommerce and Wordpress compatibility
 
 = 3.3.1 September 9, 2021 =
 - Updated width and height attributes for momo-img

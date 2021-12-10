@@ -5,10 +5,9 @@
  * Description: The #1 finance app in the App Store now on WordPress. Receive Cash App payments on your website with WooCommerce + Cash App
  * Author: The African Boss
  * Author URI: https://theafricanboss.com
- * Version: 3.3.1
- * WC requires at least: 3.0.0
- * WC tested up to: 5.6.0
- * Version Date: Aug 30, 2021
+ * Version: 3.4
+ * WC requires at least: 4.0.0
+ * WC tested up to: 5.9.0
  * Created: 2020
  * Copyright 2021 theafricanboss.com All rights reserved
  */
@@ -29,7 +28,7 @@ require_once( ABSPATH . 'wp-includes/pluggable.php');
 define('MOMOCASHAPP_PLUGIN_DIR', plugin_dir_path(__FILE__) );
 define('MOMOCASHAPP_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 define('MOMOCASHAPP_PLUGIN_DIR_URL', plugins_url( '/' , __FILE__ ));
-define('MOMOCASHAPP_PRO_PLUGIN_DIR', plugin_dir_path( 'wc-cashapp-pro' ) );
+define('MOMOCASHAPPPRO_PLUGIN_DIR', plugin_dir_path( 'wc-cashapp-pro' ) );
 
 if( ! is_plugin_active ( 'woocommerce/woocommerce.php' ) ){
 	deactivate_plugins( MOMOCASHAPP_PLUGIN_BASENAME );
@@ -55,7 +54,7 @@ if ( current_user_can( 'manage_options' ) ) {
 		activate_plugin( 'wc-cashapp-pro/cashapp.php');
 		wp_die( '<div><p>Checkout with Cashapp has been deactivated because the PRO version is activated.
 		<strong>Enjoy the upgrade</strong></p></div>
-		<div><a href="' .  esc_url( admin_url( 'admin.php?page=wc-settings&tab=checkout&section=cashapp', __FILE__ ) ) . '">Set up the plugin</a> | <a href="' . admin_url('plugins.php') . '">Return</a></div>' );
+		<div><a href="' . admin_url( 'admin.php?page=wc-settings&tab=checkout&section=cashapp' ) . '">Set up the plugin</a> | <a href="' . admin_url('plugins.php') . '">Return</a></div>' );
 	}
 
 	include_once MOMOCASHAPP_PLUGIN_DIR . 'pro/index.php';

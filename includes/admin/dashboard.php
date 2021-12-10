@@ -11,7 +11,7 @@ function cashapp_admin_menu(){
 	$parent_slug = 'wc-settings&tab=checkout&section=cashapp';
 	$capability = 'manage_options';
 
-	add_menu_page( null, 'CASHAPP', $capability , $parent_slug, 'cashapp_admin_menu', 'dashicons-money-alt' );
+	add_menu_page( null, 'CASHAPP', $capability , $parent_slug, 'cashapp_admin_menu', 'dashicons-money-alt', 56 );
 	add_submenu_page( $parent_slug , 'Upgrade CASHAPP' , '<span style="color:#99FFAA">Go Pro >> </span>' , $capability  , 'https://theafricanboss.com/cashapp' , null, null );
 	add_submenu_page( $parent_slug , 'Feature my store' , 'Get Featured' , $capability  , 'https://theafricanboss.com/cashapp#feature' , null, null );
 	add_submenu_page( $parent_slug , 'Review CASHAPP' , 'Review' , $capability  , 'https://wordpress.org/support/plugin/wc-cashapp/reviews/?filter=5' , null, null );
