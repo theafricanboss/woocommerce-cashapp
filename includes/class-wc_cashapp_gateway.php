@@ -154,7 +154,7 @@ if ( class_exists ( 'WC_Payment_Gateway' ) ) {
 			add_action( 'woocommerce_thankyou_cashapp', array( $this, 'thankyou_page' ) );
 
 			// Customer Emails
-			add_action( 'woocommerce_email_before_order_table', array( $this, 'email_instructions' ), 10, 3 );
+			add_action( 'woocommerce_email_order_details', array( $this, 'email_instructions' ), 10, 3 );
 
 		}
 

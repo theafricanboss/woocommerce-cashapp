@@ -86,6 +86,7 @@ Please check screenshots for more details on what is reported.
 - Fixed error bug that disallowed upgrade/downgrade due to global constants structure in free MOMO<PAYMENT>PRO_ while in paid, MOMO<PAYMENT>_PRO_
 - Fixed admin_url functions with issues
 - Added ! $sent_to_admin / $sent_to_admin = false to email instructions
+- Replaced woocommerce_email_before_order_table hook by woocommerce_email_order_details
 - Updated Woocommerce and Wordpress compatibility
 
 = 3.3.1 September 9, 2021 =
